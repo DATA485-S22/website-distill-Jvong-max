@@ -1,0 +1,23 @@
+---
+title: "Role of data science during covid"
+description: |
+  During the beginnings of covid how was data scientist using their skills?
+author:
+  - name: Joshua Vong
+    url: {https://www.tandfonline.com/doi/full/10.1080/00194506.2020.1855085}
+date: 2022-02-11
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Article URL:https://www.tandfonline.com/doi/full/10.1080/00194506.2020.1855085
+
+Around December of 2019, the first case of COVID-19 was reported in mainland China, since then it spread and changed how we interacted with businesses,schools,relationships, etc. During this time the role of data scientists would become critical in the fight against COVID-19. The article I linked, describes what data scientist had to go through and what techniques were used for COVID-19. In the article it mentions that data scientist are crucial when it comes to assisting medical research and monitoring real time spreading of COVID-19. Personally I think this is pretty neat, the idea of helping those through data is a concept that I'm unfamiliar to. I always thought data scientists were more of a business aspect rather then medical research, but I was wrong. The article also mentions that the use of A.I. helped in modeling predictions for COVID-19. It helped provide useful insights to the spread of COVID-19. Overall, I like the idea of data scientists putting their skills into helping people, it may not seem like much compared to doctors or nurses, but information is important, especially when the world is going through an epidemic.
+
+

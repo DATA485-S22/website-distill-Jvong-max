@@ -2,20 +2,19 @@
   "articles": [
     {
       "path": "about.html",
-      "title": "About this site",
-      "description": "Some additional details about the website",
+      "title": "About this blog",
+      "description": "Hi I'm Josh, I'm a computer sci major at Chico State with plans on getting a data science certificate. I will be posting blogs or topics that relate to data science and giving my opinions on them.",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-01-20T17:10:31-08:00"
+      "last_modified": "2022-02-11T01:19:03-08:00"
     },
     {
       "path": "index.html",
-      "title": "&quot;Test-Distill-Website&quot;",
-      "description": "Welcome to the website. I hope you enjoy it!\n",
+      "title": "My blog",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-01-20T17:10:32-08:00"
+      "last_modified": "2022-02-11T01:19:03-08:00"
     }
   ],
-  "collections": []
+  "collections": ["posts/posts.json"]
 }

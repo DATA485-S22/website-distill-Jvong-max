@@ -1,7 +1,7 @@
-name: "Josh vong"
-title: "Josh's website"
+name: "Josh Vong"
+title: "Josh's Website"
 description: |
-  Welcome to my website!
+  My blog for data485
 output_dir: "docs"
 navbar:
   right:

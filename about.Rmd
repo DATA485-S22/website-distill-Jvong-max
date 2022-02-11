@@ -1,10 +1,9 @@
 ---
-title: "About this site"
+title: "About this blog"
 description: |
-  Some additional details about the website
+  Hi I'm Josh, I'm a computer sci major at Chico State with plans on getting a data science certificate. I will be posting blogs or topics that relate to data science and giving my opinions on them.
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
-

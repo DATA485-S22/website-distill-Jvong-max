@@ -6,14 +6,14 @@
       "description": "Hi I'm Josh, I'm a computer sci major at Chico State with plans on getting a data science certificate. I will be posting blogs or topics that relate to data science and giving my opinions on them.",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-02-11T01:19:03-08:00"
+      "last_modified": "2022-03-23T04:57:55-07:00"
     },
     {
       "path": "index.html",
       "title": "My blog",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-02-11T01:19:03-08:00"
+      "last_modified": "2022-03-23T04:57:55-07:00"
     }
   ],
   "collections": ["posts/posts.json"]

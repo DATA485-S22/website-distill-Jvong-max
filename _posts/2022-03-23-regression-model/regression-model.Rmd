@@ -1,0 +1,102 @@
+---
+title: "Regression model"
+description: |
+  In this blog post I will be going over step by step on how to fit a regression model in the tidy model framework.
+author:
+  - name: Joshua Vong
+    url:
+      https://www.tandfonline.com/doi/full/10.1080/00194506.2020.1855085: {}
+date: 2022-03-23
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+The first thing I did was load up some libraries so that we are able to use the functions and data that comes with them.
+
+```{r}
+library(tidymodels)  # for the parsnip package, along with the rest of tidymodels
+
+# Helper packages
+library(readr)       # for importing data
+library(broom.mixed) # for converting bayesian models to tidy tibbles
+library(dotwhisker)  # for visualizing regression results
+```
+
+Then the data is loaded with the read_csv function, the data that we will be using is the urchin data set. With the data set we will be doing some modifications such as changing the names of some variables with setNames function to make it more verbose and using the mutate function to factor the food regime into different categories such as initial, low, or high.
+
+```{r}
+urchins <-
+  # Data were assembled for a tutorial 
+  # at https://www.flutterbys.com.au/stats/tut/tut7.5a.html
+  read_csv("https://tidymodels.org/start/models/urchins.csv") %>% 
+  # Change the names to be a little more verbose
+  setNames(c("food_regime", "initial_volume", "width")) %>% 
+  # Factors are very helpful for modeling, so we convert one column
+  mutate(food_regime = factor(food_regime, levels = c("Initial", "Low", "High")))
+
+urchins
+```
+
+Here's a graph for exploring the data involving the initial volume and width grouped by food regime. In terms of plotting we use a point like graph along with a smooth line that uses lm method, which means linear model. Looking at the graph it plots the points in which the three groups of food regime are plotted. The smooth line added goes through the graph with linear model in mind.
+
+```{r}
+ggplot(urchins,
+       aes(x = initial_volume, 
+           y = width, 
+           group = food_regime, 
+           col = food_regime)) + 
+  geom_point() + 
+  geom_smooth(method = lm)
+```
+In this section we create a variable called lm_mod that uses linear regression with a set engine of lm. Then create another variable called lm_fit that uses the previous lm_mod variable along with a fitting a linear regression involving the variables width, initial_volume, and food_regime. From this section we're able to have a linear model fit.
+
+```{r}
+
+lm_mod <- 
+  linear_reg() %>% 
+  set_engine("lm")
+
+lm_fit <- 
+  lm_mod %>% 
+  fit(width ~ initial_volume * food_regime, data = urchins)
+```
+
+Here a variable called new_points were created, in new_points we use the function expand.grid, which created a data frame with the values that can be formed with a combination of vectors or factors passed in. Passing in initial volume starting at 20, along with food_regime with combing the categories. Then another variable is created in which we will use the predict function. Inside the predict function we use the linear model fit variable created from before along with the new_data being the new_points we just created in this section. when calling our mean_pred variable we get a prediction regarding our categories from our data. Another variable is created for an interval of a upper bound and lower bound prediction. Our function will be the same the only difference is that the type will be a conf_int, which is a confidence interval. When printing it out it will produce an upper and lower bounf prediction.
+
+```{r}
+new_points <- expand.grid(initial_volume = 20, 
+                          food_regime = c("Initial", "Low", "High"))
+mean_pred <- predict(lm_fit, new_data = new_points)
+mean_pred
+
+conf_int_pred <- predict(lm_fit, 
+                         new_data = new_points, 
+                         type = "conf_int")
+conf_int_pred
+```
+
+In this section we will combine both predictions in order to plot a graph to visualize where the prediction will lie. Creating a variable that takes in the new_points with bind_cols that takes in the prediction variables. This will bind the two prediction variables together. With this new data we can finally plot the data. A new function for this graph is the involvement of the geom_errorbar, which takes in a ymin and ymax with .pred_lower and .pred_upper corresponding min and max. This is to have a limit where the prediction could only fall in the intervals.
+
+```{r}
+# Now combine: 
+plot_data <- 
+  new_points %>% 
+  bind_cols(mean_pred) %>% 
+  bind_cols(conf_int_pred)
+
+# and plot:
+ggplot(plot_data, aes(x = food_regime)) + 
+  geom_point(aes(y = .pred)) + 
+  geom_errorbar(aes(ymin = .pred_lower, 
+                    ymax = .pred_upper),
+                width = .2) + 
+  labs(y = "urchin size")
+```
+
